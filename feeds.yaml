@@ -1,0 +1,7 @@
+# RSS/Atom feeds to search for news. Pick sources you trust for your market;
+# these are placeholders to show the shape.
+feeds:
+  - name: Example business news
+    url: https://example.com/business/rss.xml
+  - name: Example marketing news
+    url: https://example.com/marketing/feed

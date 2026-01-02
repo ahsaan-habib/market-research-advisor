@@ -1,6 +1,6 @@
-"""Daily prices from Stooq's free CSV endpoint (no key). Symbols look like
-`aapl.us`, `nokia.fi` is not valid there — use the exchange suffixes Stooq
-lists, e.g. `nok.us`, `^spx`, `eurusd`.
+"""Daily prices from Stooq's CSV download endpoint. Symbols use Stooq's own
+format (e.g. `aapl.us`, `^spx`); check the symbol on stooq.com first.
+Swap ADVISOR_QUOTES_URL / this module for your own market data provider.
 
 Returns a compact summary rather than raw rows: the model needs the last
 close, the recent change and the date of the last bar, not 250 lines of CSV.
