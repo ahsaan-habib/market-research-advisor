@@ -6,7 +6,7 @@ def env(name: str, default: str) -> str:
 
 
 OLLAMA_URL = env("OLLAMA_URL", "http://localhost:11434")
-MODEL = env("MODEL", "qwen3:4b")
+MODEL = env("MODEL", "qwen3:4b-instruct")
 SEARXNG_URL = env("SEARXNG_URL", "http://localhost:8888")
 QUOTES_URL = env("QUOTES_URL", "https://stooq.com/q/d/l/")
 FEEDS_FILE = env("FEEDS_FILE", "feeds.yaml")

@@ -45,7 +45,7 @@ a branch in `gather.py`.
 ## Run it
 
 ```bash
-ollama pull qwen3:4b
+ollama pull qwen3:4b-instruct   # not plain qwen3:4b: that tag is now a thinking-only build
 docker compose up -d searxng          # web search on :8888
 python -m venv .venv && .venv/bin/pip install -e . && source .venv/bin/activate
 $EDITOR feeds.yaml                    # feeds you trust
