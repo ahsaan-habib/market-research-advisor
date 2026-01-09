@@ -3,7 +3,7 @@ key, no per-query bill). `docker compose up -d searxng`; JSON output must be
 enabled in its settings (see searxng/settings.yml)."""
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 import httpx
 
@@ -15,9 +15,11 @@ def _date(s: str | None) -> datetime | None:
     if not s:
         return None
     try:
-        return datetime.fromisoformat(s.replace("Z", "+00:00"))
+        d = datetime.fromisoformat(s.replace("Z", "+00:00"))
     except ValueError:
         return None
+    # engines often omit the offset; a naive date can't be compared with now() at all
+    return d if d.tzinfo else d.replace(tzinfo=timezone.utc)
 
 
 async def fetch(query: str, client: httpx.AsyncClient, k: int = 5) -> list[Evidence]:

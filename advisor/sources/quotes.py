@@ -21,13 +21,13 @@ def _pct(a: float, b: float) -> str:
     return f"{(a / b - 1) * 100:+.1f}%" if b else "n/a"
 
 
-async def fetch(symbol: str, client: httpx.AsyncClient) -> Evidence:
+async def fetch(symbol: str, client: httpx.AsyncClient) -> Evidence | list:
     r = await client.get(config.QUOTES_URL, params={"s": symbol.lower(), "i": "d"})
     r.raise_for_status()
     rows = [row for row in csv.DictReader(io.StringIO(r.text)) if row.get("Close")]
     if not rows:
-        return Evidence(source_type="market_data", title=f"{symbol}: no data", content="no rows returned",
-                        url=str(r.url), note="symbol unknown or provider returned nothing")
+        # unknown symbol or provider returned nothing: a gap for the brief, not evidence to cite
+        return []
     rows = rows[-70:]
     last = rows[-1]
     close = float(last["Close"])
